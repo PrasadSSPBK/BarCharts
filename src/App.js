@@ -1,77 +1,45 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts'
+import {PieChart, Pie, Legend, Cell, ResponsiveContainer} from 'recharts'
 
 const data = [
   {
-    group_name: 'Group A',
-    boys: 200,
-    girls: 400,
+    count: 809680,
+    language: 'Telugu',
   },
   {
-    group_name: 'Group B',
-    boys: 3000,
-    girls: 500,
+    count: 4555697,
+    language: 'Hindi',
   },
   {
-    group_name: 'Group C',
-    boys: 1000,
-    girls: 1500,
-  },
-  {
-    group_name: 'Group D',
-    boys: 700,
-    girls: 1200,
+    count: 12345657,
+    language: 'English',
   },
 ]
 
-const App = () => {
-  const DataFormatter = number => {
-    if (number > 1000) {
-      return `${(number / 1000).toString()}k`
-    }
-    return number.toString()
-  }
-
-  return (
-    <ResponsiveContainer width="100%" height={500}>
-      <BarChart
+const App = () => (
+  <ResponsiveContainer width="100%" height={300}>
+    <PieChart>
+      <Pie
+        cx="70%"
+        cy="40%"
         data={data}
-        margin={{
-          top: 5,
-        }}
+        startAngle={0}
+        endAngle={360}
+        innerRadius="40%"
+        outerRadius="70%"
+        dataKey="count"
       >
-        <XAxis
-          dataKey="group_name"
-          tick={{
-            stroke: 'red',
-            strokeWidth: 1,
-          }}
-        />
-        <YAxis
-          tickFormatter={DataFormatter}
-          tick={{
-            stroke: 'gray',
-            strokeWidth: 0,
-          }}
-        />
-        <Legend
-          iconType="circle"
-          layout="vertical"
-          wrapperStyle={{
-            padding: 2,
-          }}
-        />
-        <Bar dataKey="boys" name="Boys" fill="#1f77b4" barSize={100} />
-        <Bar dataKey="girls" name="Girls" fill="#fd7f0e" barSize={100} />
-      </BarChart>
-    </ResponsiveContainer>
-  )
-}
+        <Cell name="Telugu" fill="#fecba6" />
+        <Cell name="Hindi" fill="#b3d23f" />
+        <Cell name="English" fill="#a44c9e" />
+      </Pie>
+      <Legend
+        iconType="circle"
+        layout="vertical"
+        verticalAlign="middle"
+        align="right"
+      />
+    </PieChart>
+  </ResponsiveContainer>
+)
 
 export default App
